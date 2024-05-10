@@ -212,6 +212,9 @@ div.pos p{
 }
 
 
+.mytable2{
+	
+display: inline-block;
 }
 
 
@@ -266,6 +269,8 @@ input.fnorm{
 	
 	
 }
+
+
 
 
 label.fporz{
@@ -357,6 +362,8 @@ td.puntos2{
 	padding-left: 5px;		
 	
 }
+
+
 
 
 p.puntos3{

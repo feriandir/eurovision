@@ -10,11 +10,11 @@
 <style>
   table {
     border-collapse: collapse;
-	    border: 2px solid black;
+	    border: 2px solid transparent;
 
   }
    th {
-    border: 2px solid black;
+    border: 2px solid white;
     padding: 8px;
     text-align: left;
   }
@@ -73,7 +73,8 @@
 	<CENTER style="color:white">
 	<table id="dvTable">			
 	</table>
-<table id="myTable">
+	<div  style=" display: inline-flex;border: 1px solid transparent">
+<table id="myTable" style="display: inline-block">
  <!-- <thead>
     <tr>
       <th>PAIS</th>
@@ -95,6 +96,14 @@
   </tbody>
 </table>
 
+
+<table id="myTable2" style="display: inline-block;margin-left:50px;border: 2px solid white">
+   <tr>
+ 
+      <th>CLASIFICACION</th>
+	</tr>
+</table>
+</div>
 <script>
   // Function to generate dropdown HTML
   function generateDropdown(modo,banderas,posParti) {
@@ -119,7 +128,17 @@
 		
 			}
 			selects++
-		});
+			
+
+		}
+		
+
+		);
+			if(!banderas.match("puntosa")){
+				dropdownHTML = "<p style='font-size:12px;margin-left:10px'>SERGIO</p>" +dropdownHTML
+			}else{
+				dropdownHTML = "<p style='font-size:12px;margin-left:10px'> JESUS</p>" +dropdownHTML			
+			}
 		selects=0
 		dropdownHTML += "</select></div>";
 		return dropdownHTML;
