@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 <link rel="stylesheet" type="text/css" href="./resources/w2ui-2.0.min.css">
+  <link rel="stylesheet" href="styles.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv='cache-control' content='no-cache'> 
@@ -29,6 +30,7 @@
         <link rel="stylesheet" href="main.css" type="text/css" id="default"/>
         <script type="text/javascript" src="fondo.js"></script>			
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 		<script type="text/javascript" src="./resources/w2ui-2.0.min.js"></script>
 </head>
  <body id="html-content-holder" style="background-color: #1a1a17; background-repeat: no-repeat; background-size: 100% 100%;"> 
@@ -73,36 +75,51 @@
 	<CENTER style="color:white">
 	<table id="dvTable">			
 	</table>
-	<div  style=" display: inline-flex;border: 1px solid transparent">
-<table id="myTable" style="display: inline-block">
- <!-- <thead>
-    <tr>
-      <th>PAIS</th>
-      <th>SERGIO</th>
-	  <th> JESUS</th>
-      <th>PAIS</th>
-      <th> SERGIO</th>
-	  <th> JESUS</th>
-      <th>PAIS</th>
-      <th> SERGIO</th>
-	  <th> JESUS</th>
-	  <th>PAIS</th>
-      <th> SERGIO</th>
-	  <th> JESUS</th>
-    </tr>
-  </thead>-->
+	<div style=" display: inline-flex;border: 1px solid transparent" >
+	<div style="margin-left:70px;position:fixed">TOP 5</div>
+	
+	<table id="myTable2" style="display: inline-block;border: 2px solid white;margin-top:20px;height:550px;width:180px">
+
+	<tr>
+		<td> <div id="puntosRank0" class="rankingRank">0</div></td>
+		<td>
+
+			<img id="banderaRank0" src="./resources/banderas/SWEDEN.png" style="width:70px;margin-top:1px;">
+			<p id ="nombreRank0" style="font-size:10px;text-align: center">SWEDEN<p>
+
+
+		
+			
+		</td>	
+	</tr>
+	<tr>
+		<td> <div id="puntosRank1" class="rankingRank">0</div></td>
+		<td><img id="banderaRank1" src="./resources/banderas/UKRAINE.png" style="width:70px;margin-top:1px;"><p id ="nombreRank1" style="font-size:10px;text-align: center">UKRAINE<p></td>	
+	</tr>
+	<tr>
+		<td> <div id="puntosRank2" class="rankingRank">0</div></td>
+		<td><img id="banderaRank2" src="./resources/banderas/GERMANY.png" style="width:70px;margin-top:1px;"><p id ="nombreRank2" style="font-size:10px;text-align: center">GERMANY<p></td>	
+	</tr>
+	<tr>
+		<td> <div id="puntosRank3" class="rankingRank">0</div></td>
+		<td><img id="banderaRank3" src="./resources/banderas/LUXEMBOURG.png" style="width:70px;margin-top:1px;"><p id ="nombreRank3" style="font-size:10px;text-align: center">LUXEMBOURG<p></td>	
+	</tr>
+	<tr>
+		<td> <div id="puntosRank4" class="rankingRank">0</div></td>
+		<td><img id="banderaRank4" src="./resources/banderas/NETHERLANDS.png" style="width:70px;margin-top:1px;"><p id ="nombreRank4" style="font-size:10px;text-align: center">NETHERLANDS<p></td>	
+	</tr>
+
+	</table>	
+	
+<table id="myTable" style="display: inline-block;margin-left:50px">
+
   <tbody>
     <!-- Using JavaScript to generate rows and dropdowns -->
   </tbody>
 </table>
 
-<!--
-<table id="myTable2" style="display: inline-block;margin-left:50px;border: 2px solid white">
-   <tr>
- 
-      <th>CLASIFICACION</th>
-	</tr>
-</table>-->
+
+
 </div>
 <script>
   // Function to generate dropdown HTML
@@ -111,7 +128,7 @@
 	
     var dropdownHTML = "<div class='estilado'><select id='"+banderas +"' onchange='aciertos(this.value,"+banderas+")'>";
     var imgHTML = "<div class='filedrag'><img id='images'";
-	var ranking = "<div id='image"+banderas.length+ "' class='ranking'><p>0</p></div>";
+	var ranking = "<div id='image"+ banderas.length + "' class='ranking'><p>0</p></div>";
 	var pos = "<div id='pos"+banderas.length+ "' class='pos'><p>#"+posParti+"</p></div>";
 
 	var selects=0
@@ -142,13 +159,20 @@
 		selects=0
 		dropdownHTML += "</select></div>";
 		return dropdownHTML;
+		
 	}else{
 	
 		//banderas.forEach(function(bandera) {
 		  imgHTML += " src=./resources/banderas/" + modo[0] +".png style='width:70px;margin-top:1px;'>" ;
-		//});
-		
-		imgHTML += "<p style='font-size:10px'>" + modo[0] +"</p></div>"+ ranking + pos ;
+		  
+		  imgHTML += "<p style='font-size:10px'>" + modo[0] +"</p>"+ ranking + pos ;
+		  
+		  
+
+
+
+
+	
 
 		return imgHTML;	
 	
@@ -232,23 +256,74 @@
   // Call the function to generate the table
   generateTable();
   
+  
    function aciertos(suma,id) {
    
-   if(!id.id.match("puntosa")){
-   
-        var valor = parseInt(document.getElementById("puntosa"+ id.id.replace("puntosa","").replace("puntosb","")).value) + parseInt(suma)
+	   if(!id.id.match("puntosa")){
+	   
+			var valor = parseInt(document.getElementById("puntosa"+ id.id.replace("puntosa","").replace("puntosb","")).value) + parseInt(suma)
 
-   }else{
-   
-        var valor = parseInt(document.getElementById("puntosb"+ id.id.replace("puntosa","").replace("puntosb","")).value) + parseInt(suma)
+	   }else{
+	   
+			var valor = parseInt(document.getElementById("puntosb"+ id.id.replace("puntosa","").replace("puntosb","")).value) + parseInt(suma)
 
-   
-   }
-   
-   document.getElementById("image"+ id.id.replace("puntosa","").replace("puntosb","")).childNodes[0].innerHTML =  valor
+	   
+	   }
+	   
+	   document.getElementById("image"+ id.id.replace("puntosa","").replace("puntosb","")).childNodes[0].innerHTML =  valor
+	   
+	   
+	   
+		var rankingBanderas = document.getElementsByClassName("filedrag")
+		var rankingPuntos = document.getElementsByClassName("ranking")
+		const arr = Array.from(rankingPuntos);
+		
+		//rankingPuntos.sort(function(a,b){return a - b})
+		
+		// Sort cell groups based on the value of the first cell in each group
+		//return rankingPuntos.sort((a, b) => parseInt(a.innerText) - parseInt(b.innerText));
+		
+	 
+		//return rankingPuntos.sort((a, b) => parseInt(a.innerText).localeCompare(parseInt(b.innerText), undefined, { numeric: true }))
+	   
+		var a = arr.sort((a, b) => parseFloat(a.innerText)  - parseFloat(b.innerText))
+		a.reverse()
+		
+		//top 5
+		for(var w = 0; w < 5; w++){
+		
+		var refPais = a[w].id.replace("image","")
+		var banderaPais = document.getElementsByClassName("filedrag")[26- refPais].children[0].src
+		var pais = document.getElementsByClassName("filedrag")[26-refPais].children[1].innerText
+		var puntos = a[w].lastChild.innerText
+		var idd = "puntosRank"+ w
+		var idd2 = "banderaRank"+ w
+		var idd3 = "nombreRank"+ w
+		
+		document.getElementById(idd).innerHTML = puntos
+		document.getElementById(idd2).src = "."+banderaPais.match(/\/resources.*$/)[0]
+		document.getElementById(idd3).innerHTML = pais
+
+		
+		
+			//<td id="puntosRank1"></td>
+			//<td><img id="banderaRank1"  style="width:70px;margin-top:1px;"></td>	
+		//</tr>		
+		
+				//window.alert(w + ": " +pais+ " "+ puntos)
+		}
+		
+
+
+
   }
+  
+  
+  
+  
   
 </script>
 
 </body>
+	
 </html>
