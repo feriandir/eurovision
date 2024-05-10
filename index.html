@@ -74,7 +74,7 @@
 	<table id="dvTable">			
 	</table>
 <table id="myTable">
-  <thead>
+ <!-- <thead>
     <tr>
       <th>PAIS</th>
       <th>SERGIO</th>
@@ -85,8 +85,11 @@
       <th>PAIS</th>
       <th> SERGIO</th>
 	  <th> JESUS</th>
+	  <th>PAIS</th>
+      <th> SERGIO</th>
+	  <th> JESUS</th>
     </tr>
-  </thead>
+  </thead>-->
   <tbody>
     <!-- Using JavaScript to generate rows and dropdowns -->
   </tbody>
@@ -94,12 +97,13 @@
 
 <script>
   // Function to generate dropdown HTML
-  function generateDropdown(modo) {
+  function generateDropdown(modo,banderas,posParti) {
     var options = [12, 10, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 	
-    var dropdownHTML = "<div class='estilado'><select>";
+    var dropdownHTML = "<div class='estilado'><select id='"+banderas +"' onchange='aciertos(this.value,"+banderas+")'>";
     var imgHTML = "<div class='filedrag'><img id='images'";
-	var ranking = "<div class='ranking'><p id='images"+ modo.length  +"'>XX</p></div>";
+	var ranking = "<div id='image"+banderas.length+ "' class='ranking'><p>0</p></div>";
+	var pos = "<div id='pos"+banderas.length+ "' class='pos'><p>#"+posParti+"</p></div>";
 
 	var selects=0
 
@@ -122,10 +126,11 @@
 	}else{
 	
 		//banderas.forEach(function(bandera) {
-		  imgHTML += " src=./resources/banderas/" + modo[0] +".png style='width:80px;margin-top:1px;'>" ;
+		  imgHTML += " src=./resources/banderas/" + modo[0] +".png style='width:70px;margin-top:1px;'>" ;
 		//});
 		
-		imgHTML += "<p style='font-size:12px'>" + modo[0] +"</p></div>"+ ranking ;
+		imgHTML += "<p style='font-size:10px'>" + modo[0] +"</p></div>"+ ranking + pos ;
+
 		return imgHTML;	
 	
 	}
@@ -135,52 +140,54 @@
   // Function to generate table rows
   function generateTable() {
   var banderas =
-	["FRANCE", 
-	"SPAIN", 
-	"GERMANY", 
-	"ITALY", 
-	"SWEDEN", 
-	"UNITEDKINGDOM", 
-	"CROATIA", 
-	"LUXEMBOURG", 
-	"UKRAINE", 
-	"CYPRUS", 
-	"PORTUGAL", 
-	"FINLAND", 
-	"SERBIA", 
-	"IRELAND", 
-	"SLOVENIA", 
-	"LITHUANIA", 
-	"ALBANIA", 
-	"ARMENIA", 
-	"AUSTRIA", 
-	"BELGIUM", 
-	"CZECHIA", 
-	"DENMARK", 
-	"ESTONIA", 
-	"GEORGIA", 
-	"GREECE", 
-	"ISRAEL", 
-	"LATVIA", 
-	"MALTA", 
-	"NETHERLANDS", 
-	"NORWAY", 
-	"SANMARINO",	
-	"SWITZERLAND"];
+	['SWEDEN',
+	'UKRAINE',
+	'GERMANY',
+	'LUXEMBOURG',
+	'NETHERLANDS',
+	'ISRAEL',
+	'LITHUANIA',
+	'SPAIN',
+	'ESTONIA',
+	'IRELAND',
+	'LATVIA',
+	'GREECE',
+	'UNITEDKINGDOM',
+	'NORWAY',
+	'ITALY',
+	'SERBIA',
+	'FINLAND',
+	'PORTUGAL',
+	'ARMENIA',
+	'CYPRUS',
+	'SWITZERLAND',
+	'SLOVENIA',
+	'CROATIA',
+	'GEORGIA',
+	'FRANCE',
+	'AUSTRIA'];
 	var letoca=0
 	var dropdowns = 0
 	var elementos = banderas.length
     var tableBody = document.querySelector("#myTable tbody");
-    for (var i = 0; i < (elementos/3); i++) {
+	var posparti = 0
+    for (var i = 0; i < (elementos/4); i++) {
       var row = tableBody.insertRow();
-      for (var j = 0; j < 9; j++) {
+      for (var j = 0; j < 12; j++) {
         var cell = row.insertCell();
 		//AÑADIR SELECTS EN COLUMNAS PARES Y PARES +1
 		if (j == 1  || letoca>0){	
 		
 
 			if( dropdowns < elementos*2){
-				cell.innerHTML = generateDropdown(1);
+				var param2 = banderas.length+1
+				if(letoca>1){
+				var param = "puntosa"+param2
+				}else{
+				var param = "puntosb"+param2
+				
+				}
+				cell.innerHTML = generateDropdown(1,param,0);
 				
 
 				dropdowns++
@@ -191,8 +198,8 @@
 		}else{
 		
 			if(banderas.length>=1){
-		
-				cell.innerHTML = generateDropdown(banderas);
+				posparti++
+				cell.innerHTML = generateDropdown(banderas,banderas,posparti);
 				if(letoca==0){
 					banderas.splice(0,1)
 				}
@@ -205,6 +212,23 @@
 
   // Call the function to generate the table
   generateTable();
+  
+   function aciertos(suma,id) {
+   
+   if(!id.id.match("puntosa")){
+   
+        var valor = parseInt(document.getElementById("puntosa"+ id.id.replace("puntosa","").replace("puntosb","")).value) + parseInt(suma)
+
+   }else{
+   
+        var valor = parseInt(document.getElementById("puntosb"+ id.id.replace("puntosa","").replace("puntosb","")).value) + parseInt(suma)
+
+   
+   }
+   
+   document.getElementById("image"+ id.id.replace("puntosa","").replace("puntosb","")).childNodes[0].innerHTML =  valor
+  }
+  
 </script>
 
 </body>

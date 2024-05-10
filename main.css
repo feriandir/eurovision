@@ -120,8 +120,8 @@ div.filedrag
 {
 	display: true;
 	font-weight: normal;
-	width: 120px;
-	height:120px;
+	width: 110px;
+	height:110px;
 	text-align: center;
 	padding: 1em 0;
 	/*margin: 1em 0;*/
@@ -171,11 +171,23 @@ font-size: 40px;
 
 }
 	
+div.pos{
+	position:absolute;
+	width:27px;
+	height:27px;
+	margin-top:-20px;
+	margin-left:95px;
+	background: #1a1a17;
+	
+	    border: 1px solid white;
+	/*border-radius: 50%;*/
+}
+
 div.ranking{
 	position:absolute;
 	width:30px;
 	height:30px;
-	margin-top:-125px;
+	margin-top:-120px;
 	margin-left:-10px;
 	background: purple;
 
@@ -191,6 +203,13 @@ div.ranking p{
 
 }
 
+div.pos p{
+	text-align:center;
+	font-size: 13px;
+	margin-top:5px;
+	font-color:white;
+
+}
 
 
 }
