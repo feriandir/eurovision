@@ -110,7 +110,10 @@
 	</tr>
 
 	</table>	
-	
+<div style= "margin-top:570px;position:absolute">
+<button class="edit0" id="edit0" style="background-image:url(./resources/aspa.png);border:transparent;margin-left:0px" title="Limpiar puntos" onClick="editclear();"></button>
+<p>limpiar puntos</p>
+</div>	
 <table id="myTable" style="display: inline-block;margin-left:50px">
 
   <tbody>
@@ -122,6 +125,93 @@
 
 </div>
 <script>
+
+
+	 // -------------------------------------------------------
+	 // Funcion reiniciar ruleta
+	 // -------------------------------------------------------
+	function editclear(){
+
+
+		var r = confirm("¿DESEAS BORRAR?");
+		if (r == true) {
+		
+			localStorage.clear();
+			 var banderas =
+				['SWEDEN',
+				'UKRAINE',
+				'GERMANY',
+				'LUXEMBOURG',
+				'NETHERLANDS',
+				'ISRAEL',
+				'LITHUANIA',
+				'SPAIN',
+				'ESTONIA',
+				'IRELAND',
+				'LATVIA',
+				'GREECE',
+				'UNITEDKINGDOM',
+				'NORWAY',
+				'ITALY',
+				'SERBIA',
+				'FINLAND',
+				'PORTUGAL',
+				'ARMENIA',
+				'CYPRUS',
+				'SWITZERLAND',
+				'SLOVENIA',
+				'CROATIA',
+				'GEORGIA',
+				'FRANCE',
+				'AUSTRIA'];			
+			
+			var item = 0
+			var elementos = banderas.length
+			
+			for (var i = 0; i < elementos; i++) {
+			
+				item++
+				document.getElementById("image"+item).lastChild.innerHTML = 0		
+			
+			}
+			
+			var item2 = 0
+			var elementos2 = document.getElementsByClassName("estilado").length
+			
+			for (var i = 0; i < elementos2; i++) {
+			
+				item2++
+				document.getElementsByClassName("estilado")[i].children[0].value = 0	
+			
+			}	
+		
+		}
+		
+		
+		document.getElementById("banderaRank0").src="./resources/banderas/SWEDEN.png"
+		document.getElementById("nombreRank0").innerHTML = "SWEDEN"
+		document.getElementById("puntosRank0").innerHTML = "0"
+		
+		document.getElementById("banderaRank1").src="./resources/banderas/UKRAINE.png"
+		document.getElementById("nombreRank1").innerHTML = "UKRAINE"
+		document.getElementById("puntosRank1").innerHTML = "0"
+		
+		document.getElementById("banderaRank2").src="./resources/banderas/GERMANY.png"
+		document.getElementById("nombreRank2").innerHTML = "GERMANY"		
+		document.getElementById("puntosRank2").innerHTML = "0"
+		
+		document.getElementById("banderaRank3").src="./resources/banderas/LUXEMBOURG.png"
+		document.getElementById("nombreRank3").innerHTML = "LUXEMBOURG"
+		document.getElementById("puntosRank3").innerHTML = "0"
+
+		document.getElementById("banderaRank4").src="./resources/banderas/NETHERLANDS.png"
+		document.getElementById("nombreRank4").innerHTML = "NETHERLANDS"
+		document.getElementById("puntosRank4").innerHTML = "0"
+
+	
+
+
+	}
   // Function to generate dropdown HTML
   function generateDropdown(modo,banderas,posParti) {
     var options = [12, 10, 8, 7, 6, 5, 4, 3, 2, 1, 0];
@@ -251,6 +341,70 @@
 		}
       }
     }
+
+	//recuperar puntos ultima sesion
+
+	
+	var guardado = JSON.parse(localStorage.puntos)
+	var guardado2 = JSON.parse(localStorage.puntos2)
+
+	if(guardado){
+	
+		var item = 0
+		
+	    for (var i = 0; i < elementos; i++) {
+		
+			item++
+			document.getElementById("image"+item).lastChild.innerHTML = guardado[i]		
+		
+		}
+		
+		var item2 = 0
+		var elementos2 = document.getElementsByClassName("estilado").length
+		
+	    for (var i = 0; i < elementos2; i++) {
+		
+			item2++
+			document.getElementsByClassName("estilado")[i].children[0].value = guardado2[i]		
+		
+		}	
+		
+		
+	
+	}
+	
+		//top 5
+		
+		var rankingBanderas = document.getElementsByClassName("filedrag")
+		var rankingPuntos = document.getElementsByClassName("ranking")
+		const arr = Array.from(rankingPuntos);
+		
+
+	   
+		var a = arr.sort((a, b) => parseFloat(a.innerText)  - parseFloat(b.innerText))
+		a.reverse()		
+		for(var w = 0; w < 5; w++){
+		
+		var refPais = a[w].id.replace("image","")
+		var banderaPais = document.getElementsByClassName("filedrag")[26- refPais].children[0].src
+		var pais = document.getElementsByClassName("filedrag")[26-refPais].children[1].innerText
+		var puntos = a[w].lastChild.innerText
+		var idd = "puntosRank"+ w
+		var idd2 = "banderaRank"+ w
+		var idd3 = "nombreRank"+ w
+		
+		document.getElementById(idd).innerHTML = puntos
+		document.getElementById(idd2).src = "."+banderaPais.match(/\/resources.*$/)[0]
+		document.getElementById(idd3).innerHTML = pais
+
+		
+		
+			//<td id="puntosRank1"></td>
+			//<td><img id="banderaRank1"  style="width:70px;margin-top:1px;"></td>	
+			//</tr>		
+		
+				//window.alert(w + ": " +pais+ " "+ puntos)
+		}
   }
 
   // Call the function to generate the table
@@ -314,7 +468,61 @@
 		}
 		
 
-
+var banderas =
+	['SWEDEN',
+	'UKRAINE',
+	'GERMANY',
+	'LUXEMBOURG',
+	'NETHERLANDS',
+	'ISRAEL',
+	'LITHUANIA',
+	'SPAIN',
+	'ESTONIA',
+	'IRELAND',
+	'LATVIA',
+	'GREECE',
+	'UNITEDKINGDOM',
+	'NORWAY',
+	'ITALY',
+	'SERBIA',
+	'FINLAND',
+	'PORTUGAL',
+	'ARMENIA',
+	'CYPRUS',
+	'SWITZERLAND',
+	'SLOVENIA',
+	'CROATIA',
+	'GEORGIA',
+	'FRANCE',
+	'AUSTRIA'];
+	
+	var puntosGuardados = [];
+	var puntosGuardados2 = [];
+	var item = 0
+	var item2 = 0	
+	
+	var elementos = banderas.length
+    for (var i = 0; i < elementos; i++) {
+	
+	 item++
+		 puntosGuardados.push(document.getElementById("image"+item).lastChild.innerHTML)
+	
+	}
+	
+	
+	localStorage.setItem("puntos",JSON.stringify(puntosGuardados));	
+	
+	
+	var elementos2 = document.getElementsByClassName("estilado").length
+    for (var i = 0; i < elementos2; i++) {
+	
+	 item2++
+		 puntosGuardados2.push(document.getElementsByClassName("estilado")[i].children[0].value)
+	
+	}
+	
+	
+	localStorage.setItem("puntos2",JSON.stringify(puntosGuardados2));	
 
   }
   
